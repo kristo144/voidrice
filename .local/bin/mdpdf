@@ -1,0 +1,10 @@
+#!/bin/sh
+# Generate pdf from markdown and view in zathura
+
+[ -z "$1" ] && exit 1
+
+if [ -z "$2" ] ; then
+	pandoc -t pdf -V geometry:margin=1in "$1" | zathura -
+else
+	pandoc -t pdf -V geometry:margin=1in "$1" -o "$2"
+fi

@@ -26,6 +26,8 @@ set cleaner '~/.config/lf/cleaner'
 set previewer '~/.config/lf/scope'
 set autoquit on
 set relativenumber
+set promptfmt "\033[32;1m%u@%h\033[0m:\033[34;1m%d\033[0m"
+set ratios 1:2
 
 # cmds/functions
 cmd open ${{

@@ -161,7 +161,7 @@ set shiftwidth=0
 	autocmd BufRead,BufNewFile Xresources,Xdefaults,xresources,xdefaults set filetype=xdefaults
 	autocmd BufWritePost Xresources,Xdefaults,xresources,xdefaults !xrdb %
 " Recompile dwmblocks on config edit.
-	autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/; sudo make install && { killall -q dwmblocks;setsid -f dwmblocks }
+	autocmd BufWritePost ~/.local/src/dwmblocks/config.h !cd ~/.local/src/dwmblocks/; make install && sv restart dwmblocks
 " HUP dunst on config edit.
 	autocmd BufWritePost $XDG_CONFIG_HOME/dunst/dunstrc silent ! kill -HUP $(pidof dunst)
 

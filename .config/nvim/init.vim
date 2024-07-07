@@ -73,6 +73,8 @@ set shiftwidth=0
 	set splitbelow splitright
 " Open new terminal in current directory
 	"map <leader>n
+" Fast quit
+	nmap q :quit<CR>
 
 " Nerd tree
 	map <leader>n :NERDTreeToggle<CR> " Overwritten by newterm

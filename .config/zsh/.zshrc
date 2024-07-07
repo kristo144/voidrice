@@ -71,8 +71,7 @@ lftoggle () {
 		lf -remote "send $id cd $PWD" && exit
 	fi
 }
-bindkey -s '^o' '^ulftoggle\n'
-
+bindkey -s '^o' '^[S lftoggle\n'
 bindkey -s '^a' '^ufzf | xargs -r v\n'
 bindkey -s '^z' '^u fg\n'
 bindkey -s '^f' '^ucd "$(dirname "$(fzf)")"\n'

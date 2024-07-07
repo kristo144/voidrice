@@ -64,9 +64,15 @@ lfcd () {
         [ -d "$dir" ] && [ "$dir" != "$(pwd)" ] && cd "$dir"
     fi
 }
-bindkey -s '^o' '^ulfcd\n'
+lftoggle () {
+	if [ -z $LF_LEVEL ]; then
+		lfcd
+	else
+		lf -remote "send $id cd $PWD" && exit
+	fi
+}
+bindkey -s '^o' '^ulftoggle\n'
 
-#bindkey -s '^a' '^ubc -lq\n'
 bindkey -s '^a' '^ufzf | xargs -r v\n'
 bindkey -s '^z' '^u fg\n'
 bindkey -s '^f' '^ucd "$(dirname "$(fzf)")"\n'
@@ -80,6 +86,11 @@ bindkey -M vicmd '^[[P' vi-delete-char
 bindkey -M vicmd '^e' edit-command-line
 bindkey -M visual '^[[P' vi-delete
 
+function cd {
+	test -z "$1" && builtin cd || \
+		mkdir -p "$1" &&  builtin cd "$1"
+}
+
+
 # Load syntax highlighting; should be last.
-#source /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null
 source ~rr/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null

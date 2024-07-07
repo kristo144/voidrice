@@ -16,8 +16,9 @@ cfp	${XDG_CONFIG_HOME:-$HOME/.config}/shell/profile		# profile file for login se
 cfm	${XDG_CONFIG_HOME:-$HOME/.config}/mutt/muttrc		# mutt (email client) config
 cfn	${XDG_CONFIG_HOME:-$HOME/.config}/newsboat/config	# newsboat (RSS reader)
 cfu	${XDG_CONFIG_HOME:-$HOME/.config}/newsboat/urls		# RSS urls for newsboat
-cfmb	${XDG_CONFIG_HOME:-$HOME/.config}/ncmpcpp/bindings	# ncmpcpp (music player) keybinds file
-cfmc	${XDG_CONFIG_HOME:-$HOME/.config}/ncmpcpp/config	# ncmpcpp (music player) config
 cfl	${XDG_CONFIG_HOME:-$HOME/.config}/lf/lfrc		# lf (file browser) config
 cfL	${XDG_CONFIG_HOME:-$HOME/.config}/lf/scope		# lf's scope/preview file
 cfX	${XDG_CONFIG_HOME:-$HOME/.config}/sxiv/exec/key-handler	# sxiv (image viewer) key/script handler
+cfr	${XDG_CONFIG_HOME:-$HOME/.config}/river/init		# river
+cff	${XDG_CONFIG_HOME:-$HOME/.config}/foot/foot.ini		# foot
+cfy	${XDG_CONFIG_HOME:-$HOME/.config}/yambar/config.yml

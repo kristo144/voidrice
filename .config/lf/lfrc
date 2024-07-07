@@ -24,7 +24,7 @@ set period 1
 set hiddenfiles ".*:*.aux:*.log:*.bbl:*.bcf:*.blg:*.run.xml"
 set cleaner '~/.config/lf/cleaner'
 set previewer '~/.config/lf/scope'
-set autoquit on
+set autoquit true
 set relativenumber
 set promptfmt "\033[32;1m%u@%h\033[0m:\033[34;1m%d\033[0m"
 set ratios 1:2
@@ -32,6 +32,7 @@ set ratios 1:2
 # cmds/functions
 cmd open ${{
     case $(file --mime-type "$(readlink -f $f)" -b) in
+    	application/vnd.microsoft.portable-executable) wine $fx ;;
 	application/vnd.openxmlformats-officedocument.spreadsheetml.sheet) localc $fx ;;
 	image/vnd.djvu|application/pdf|application/octet-stream|application/postscript) setsid -f zathura $fx >/dev/null 2>&1 ;;
         text/*|application/json|inode/x-empty|application/x-subrip) $EDITOR $fx;;
@@ -123,6 +124,7 @@ map X !$f
 map o &mimeopen "$f"
 map O $mimeopen --ask "$f"
 map S push $$f
+map <c-o> w
 
 map A rename # at the very end
 map c push A<c-u> # new rename
@@ -138,7 +140,9 @@ map V push :!nvim<space>
 
 map W $setsid -f $TERMINAL >/dev/null 2>&1
 
-map Y $printf "%s" "$fx" | xclip -selection clipboard
+#map Y $printf "%s" "$fx" | xclip -selection clipboard
+map Y :echo "Copying $fx to clipboard"; $wl-copy "$f"
+map L $ln -s "$fx" "$PWD"
 
 # Source Bookmarks
 source "~/.config/lf/shortcutrc"

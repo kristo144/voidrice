@@ -32,6 +32,8 @@ Plug 'ap/vim-css-color'
 Plug 'joelbeedle/pseudo-syntax'
 Plug 'ptzz/lf.vim'
 Plug 'voldikss/vim-floaterm'
+Plug 'shaunsingh/solarized.nvim'
+Plug 'catppuccin/nvim'
 call plug#end()
 
 set title
@@ -56,9 +58,9 @@ set shiftwidth=0
 	syntax on
 	set encoding=utf-8
 	set number relativenumber
-"	if $TERM != 'linux'
-"		colorscheme shine
-"	endif
+	if $TERM != 'linux'
+		colorscheme catppuccin-latte
+	endif
 " Enable autocompletion:
 	set wildmode=longest,list,full
 " Disables automatic commenting on newline:
@@ -100,7 +102,7 @@ set shiftwidth=0
 
 " Open my bibliography file in split
 	map <leader>b :vsp<space>$BIB<CR>
-	map <leader>r :vsp<space>$REFER<CR>
+	"map <leader>r :vsp<space>$REFER<CR> "Overwritten by make run
 
 " Replace all is aliased to S.
 	"nnoremap S :%s//g<Left><Left>
@@ -115,6 +117,7 @@ set shiftwidth=0
 
 " Run make
 	map <leader>M :w! \| !"make"<CR>
+	map <leader>r :w! \| !"make"<space>run<CR>
 	map <leader>m :w! \| !"make"<space>
 
 " Open corresponding .pdf/.html or preview
@@ -132,6 +135,7 @@ set shiftwidth=0
 	autocmd BufRead,BufNewFile *.tex set filetype=tex
 
 " Save file as sudo on files that require root permission
+	"cabbrev w!! execute '! write !sudo tee % >/dev/null' <bar> edit!
 	cabbrev w!! execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 	"map ZR execute 'silent! write !sudo tee % >/dev/null' <bar> edit!
 
@@ -147,6 +151,10 @@ set shiftwidth=0
 	autocmd BufWritePre * %s/\n\+\%$//e
   	autocmd BufWritePre * cal cursor(currPos[1], currPos[2])
 
+" Update keyd
+	autocmd BufWritePost /etc/keyd/*.conf !sudo sv hup keyd
+" Update yambar
+	autocmd BufWritePost ~/.config/yambar/config.yml silent !sv hup ~/.local/runsvdir/yambar
 " When shortcut files are updated, renew bash and ranger configs with new material:
 	autocmd BufWritePost bm-files,bm-dirs !shortcuts
 " Run xrdb whenever Xdefaults or Xresources are updated.

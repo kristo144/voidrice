@@ -1,58 +1,48 @@
 #!/bin/sh
 
-# Use neovim for vim if present.
-[ -x "$(command -v nvim)" ] && alias vim="nvim" vimdiff="nvim -d"
-
-# Use $XINITRC variable if file exists.
-[ -f "$XINITRC" ] && alias startx="startx $XINITRC"
-
 # sudo not required for some system commands
-for command in mount umount sv pacman updatedb su shutdown poweroff reboot ; do
+for command in mount umount pacman updatedb su shutdown poweroff reboot ; do
 	alias $command="sudo $command"
 done; unset command
 
 se() { cd ~/.local/bin; $EDITOR $(fzf) ;}
 
 # Verbosity and settings that you pretty much just always are going to want.
-alias \
-	cp="cp -iv" \
-	mv="mv -iv" \
-	rm="rm -vI" \
-	bc="bc -ql" \
-	mkd="mkdir -pv" \
-	yt="yt-dlp --embed-metadata -i" \
-	yta="yt -x -f bestaudio/best" \
-	ffmpeg="ffmpeg -hide_banner"
+alias cp="cp -iv"
+alias mv="mv -iv"
+alias rm="rm -vI"
+alias mkd="mkdir -pv"
+alias ffmpeg="ffmpeg -hide_banner"
 
 # Colorize commands when possible.
-alias \
-	ls="ls -hN --color=auto --group-directories-first" \
-	grep="grep --color=auto" \
-	diff="diff --color=auto" \
-	ccat="highlight --out-format=ansi" \
-	ip="ip -color=auto"
+alias ls="ls -hN --color=auto --group-directories-first"
+alias grep="grep --color=auto"
+alias diff="diff --color=auto"
+alias ccat="highlight --out-format=ansi"
+alias ip="ip -color=auto"
 
 # These common commands are just too long! Abbreviate them.
-alias \
-	ka="killall" \
-	g="git" \
-	trem="transmission-remote" \
-	YT="youtube-viewer" \
-	sdn="shutdown -h now" \
-	e="$EDITOR" \
-	v="$EDITOR" \
-	p="pacman" \
-	xi="sudo xbps-install" \
-	xr="sudo xbps-remove -R" \
-	xq="xbps-query" \
-	z="zathura"
+alias vd="vidir"
+alias ka="killall"
+alias g="git"
+alias trem="transmission-remote"
+alias YT="youtube-viewer"
+alias sdn="shutdown -h now"
+alias e="$EDITOR"
+alias v="$EDITOR"
+alias p="pacman"
+alias xi="sudo xbps-install"
+alias xu="sudo xbps-install -Syu"
+alias xr="sudo xbps-remove -R"
+alias xq="xbps-query"
+alias xs="xbps-query -Rs"
+alias z="zathura"
+alias pg="pass git"
+alias vr='/usr/bin/git --git-dir=$HOME/.local/src/voidrice --work-tree=$HOME'
+alias ssv="sudo sv"
 
-alias \
-	lf="lfub" \
-	magit="nvim -c MagitOnly" \
-	ref="shortcuts >/dev/null; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc" \
-	weath="less -S ${XDG_CACHE_HOME:-$HOME/.cache}/weatherreport" \
-	gfp="gcc -g -Wall -Wextra -pedantic" \
-	dsm='desmume "${PWD##*/}.nds"'
-
-alias vr='/usr/bin/git --git-dir=/home/kris/.local/src/koidrice --work-tree=/home/kris'
+alias lf="lfub"
+alias mg="nvim -c MagitOnly"
+alias ref="shortcuts >/dev/null; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/shortcutrc ; source ${XDG_CONFIG_HOME:-$HOME/.config}/shell/zshnameddirrc"
+alias weath="less -S ${XDG_CACHE_HOME:-$HOME/.cache}/weatherreport"
+alias gfp="gcc -g -Wall -Wextra -pedantic"

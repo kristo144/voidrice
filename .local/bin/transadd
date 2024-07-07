@@ -1,0 +1,12 @@
+#!/bin/sh
+host="rpi4.local"
+root="/mnt/ssd/kris/Torrents/"
+
+dir="${root%/}/$(dmenu -l 10 -p "Download to $root" -i << EOF
+Seasonal
+Anime
+Games
+EOF
+)" && transmission-remote "${host}" -w "${dir}" -a "$@" \
+&& notify-send "Torrent added successfully" \
+|| notify-send "Error adding torrent"

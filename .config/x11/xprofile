@@ -3,8 +3,11 @@
 # This file runs when a DM logs you into a graphical session.
 # If you use startx/xinit like a Chad, this file will also be sourced.
 
-xrandr --dpi 96		# Set DPI. User may want to use a larger number for larger screens.
-setbg ~dt/wallpapers	# set the background with the `setbg` script
+[ 1080 -lt $(xdpyinfo | awk -F'[ x]+' '/dimensions/ {print $4}') ] \
+	&& xrandr --dpi 144 \
+	|| xrandr --dpi 96
+
+setbg ~dt/wallpapers
 export $(dbus-launch)
 export PIPEWIRE_RUNTIME_DIR=$(mktemp -d)
 export PULSE_RUNTIME_PATH="$PIPEWIRE_RUNTIME_DIR"
